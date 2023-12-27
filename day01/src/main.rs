@@ -13,16 +13,15 @@ fn main() -> Result<()> {
     Ok(())
 }
 
-fn part_one(input: &String) -> Result<u32> {
+fn part_one(input: &str) -> Result<u32> {
     let mut sum = 0;
-    let mut lines = input.lines();
-    while let Some(line) = lines.next() {
+    for line in input.lines() {
         let digits: Vec<u32> = line
             .chars()
             .filter_map(|a| a.to_digit(10))
             .collect();
 
-        if digits.len() < 1 {
+        if digits.is_empty() {
             continue;
         }
 
@@ -33,11 +32,11 @@ fn part_one(input: &String) -> Result<u32> {
         ).parse::<u32>()?;
         sum += line_num;
     }
-    return Ok(sum);
+    Ok(sum)
 }
 
 fn replace_digit_words(input: String) -> String {
-    return input
+    input
         .replace("one", "o1e")
         .replace("two", "t2o")
         .replace("three", "th3ee")
@@ -46,5 +45,5 @@ fn replace_digit_words(input: String) -> String {
         .replace("six", "s6x")
         .replace("seven", "se7en")
         .replace("eight", "ei8ht")
-        .replace("nine", "ni9e");
+        .replace("nine", "ni9e")
 }
